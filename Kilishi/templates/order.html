@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Now{% endblock %}
+
+{% block content %}
+<div class="center-card"> <!-- This ensures centering -->
+    <div class="card order-form">
+        <h2>Order Now</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ order.as_p }}  <!-- Django renders form fields here -->
+            </div>
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

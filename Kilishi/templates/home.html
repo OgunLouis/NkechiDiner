@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    {% if prod %}
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;"> <!-- Flexbox for spacing -->
+            {% for item in prod|slice:":5" %}  <!-- Display only the first 5 items -->
+                <div style="text-align: center; width: 200px;">  <!-- Center align content -->
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.product_name }}"
+                             style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px;"> <!-- Consistent image size -->
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
+                    <p style="font-weight: bold; margin-top: 5px;">{{ item.product_name }}</p>
+                    <p style="color: green;">₦{{ item.price }}</p>
+                     <!-- Add to Cart Button -->
+            <a href="{% url 'add_to_cart' item.id %}" 
+            style="display: inline-block; margin-top: 10px; padding: 10px 15px; background: green; color: white; text-decoration: none; border-radius: 5px;">
+            Add to Cart
+         </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No item to display</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Succesfully submitted{% endblock %}
+
+{% block content %}
+<div class="card" style="margin: 100px auto; padding: 20px;">
+    <h3>ORDER COMPLETED</h3>
+    <p>Your order has been successfully submitted.</p>
+        <a href="{% url 'homepage' %}" class="back-link">Go Back to Home Page</a>
+</div>
+{% endblock %}

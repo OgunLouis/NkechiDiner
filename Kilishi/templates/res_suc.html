@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Reservation Received{% endblock %}
+
+{% block content %}
+<div class="card" style="margin: 100px auto; padding: 20px;">
+    <h3>RESERVATION SUBMITTED</h3>
+    <p>Your reservation has been successfully submitted.</p>
+        <a href="{% url 'homepage' %}" class="back-link">Go Back to Home Page</a>
+</div>
+{% endblock %}
