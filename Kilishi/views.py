@@ -47,14 +47,33 @@ def menu(request):
 def add_to_cart(request, products_id):
     product = get_object_or_404(products, id=products_id)
 
-    # Session-based cart
+    # Retrieve existing cart or create an empty one
     cart = request.session.get('cart', {})
 
     if str(products_id) in cart:
-        cart[str(products_id)] += 1  # Increase quantity
+        if isinstance(cart[str(products_id)], int):
+            cart[str(products_id)] = {
+                'product_name': product.product_name,
+                'price': product.price,
+                'quantity': cart[str(products_id)] + 1
+            }
+        else:
+            cart[str(products_id)]['quantity'] += 1  
     else:
-        cart[str(products_id)] = 1  # Add new item
+        cart[str(products_id)] = {
+            'product_name': product.product_name,
+            'price': product.price,
+            'quantity': 1
+        }
 
-    request.session['cart'] = cart  # Save cart to session
+    # Save updated cart back to session
+    request.session['cart'] = cart
+    request.session.modified = True 
 
-    return redirect('menu') 
+    print("🛒 Cart Updated:", request.session['cart'])  # Debugging output
+
+    return redirect('menu')  
+
+def view_cart(request):
+    cart = request.session.get('cart', {}) 
+    return render(request, 'cart.html', {'cart': cart})

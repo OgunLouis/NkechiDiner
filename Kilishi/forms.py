@@ -1,11 +1,11 @@
 from django import forms
 from django.forms.widgets import NumberInput
 
-from . models import kilishi_order,Reservations
+from . models import food_order,Reservations
 class Kili_order(forms.ModelForm):
     class Meta:
-        model = kilishi_order
-        fields =['first_name', 'last_name', 'date','address','size']
+        model = food_order
+        fields =['first_name', 'last_name','address',]
 
 
 class Res_order(forms.ModelForm):
