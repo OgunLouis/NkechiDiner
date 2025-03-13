@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Select Your Meal{% endblock %}
+
+{% block content %}
+<div class="center-card">
+    <div class="card order-form">
+        <h2>Select Your Meal</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="meal">Choose a Meal:</label>
+                <select name="meal" id="meal">
+                    {% for meal in meals %}
+                        <option value="{{ meal.id }}">{{ meal.product_name }} - ${{ meal.price }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit">Proceed</button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

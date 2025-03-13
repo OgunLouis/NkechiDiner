@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+
+{% if request.session.cart %}
+    <table border="1" cellpadding="10">
+        
+        <tr>
+            <h2>Your Cart</h2>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+        {% for key, item in request.session.cart.items %}
+        <tr>
+            <td>{{ item.product_name }}</td>
+            <td>₦{{ item.price }}</td>
+            <td>₦{{ item.price|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+
+<a href="{% url 'menu' %}">Continue Shopping</a>
+{% endblock %}
