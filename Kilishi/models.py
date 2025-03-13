@@ -2,13 +2,15 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
-class food_order(models.Model):
+class kilishi_order(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
+    date = models.DateField()
     phone_num = models.CharField(max_length=15)
     address = models.CharField(max_length=400)
+    size = models.IntegerField(default=0)
     def __str__(self):
-        return self.first_name +'  '+ self.last_name+' '+self.address
+        return self.first_name +'  '+ self.last_name+'  '+self.size+'  '+self.address
 
 class products(models.Model):
     product_name = models.CharField(max_length=200)
