@@ -11,11 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
 import dj_database_url
-
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +25,7 @@ SECRET_KEY = 'django-insecure-hlg51yv$)f7zw3_fk8*58wcs7(h2on-qo4qy$(*i^vbmfxof)u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "nkechidiner.onrender.com localhost 127.0.0.1").split()
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -77,9 +73,6 @@ WSGI_APPLICATION = 'NkechiDiner.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-DATABASES = {
-    "default": dj_database_url.config(default="postgresql://nkechi_user:5e2tbN6a2AbuR6Zxz43O2ZIQ69O668tq@dpg-cv8k7jtumphs73cppqvg-a.oregon-postgres.render.com/nkechi")
-}
 
 DATABASES = {
     'default': {
@@ -87,7 +80,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+DATABASES['default'] = dj_database_url.parse("postgresql://nkechi_user:5e2tbN6a2AbuR6Zxz43O2ZIQ69O668tq@dpg-cv8k7jtumphs73cppqvg-a.oregon-postgres.render.com/nkechi")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
