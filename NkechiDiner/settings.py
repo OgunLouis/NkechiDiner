@@ -90,17 +90,11 @@ WSGI_APPLICATION = 'NkechiDiner.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nkechidiner',  # Your database name
-        'USER': 'root',  # Default XAMPP user
-        'PASSWORD': '',  # Leave empty (unless you set one)
-        'HOST': '127.0.0.1',  # Or 'localhost'
-        'PORT': '3306',  # Default MySQL port
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get("DATABASE_URL", "postgres://nkechi_user:5e2tbN6a2AbuR6Zxz43O2ZIQ69O668tq@dpg-cv8k7jtumphs73cppqvg-a/nkechi"),
+        conn_max_age=600
+    )
 }
-#database_url = os.environ.get("DATABASE_URL")
-#DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
