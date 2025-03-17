@@ -11,36 +11,25 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url
 import os
+import dj_database_url
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-
-
-# Add Cloudinary settings
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'damuyovkc',
-    'API_KEY': '827671151929193',
-    'API_SECRET': '6OYoZIQyopiXaWvUjr5PHz-QQvw',
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = 'django-insecure-hlg51yv$)f7zw3_fk8*58wcs7(h2on-qo4qy$(*i^vbmfxof)u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False").lower() == "True"
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "nkechidiner.onrender.com").split(",")
+DEBUG = True
 
-
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "nkechidiner.onrender.com localhost 127.0.0.1").split()
 
 
 # Application definition
@@ -52,8 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Kilishi','cloudinary',
-    'cloudinary_storage',
+    'Kilishi',
 ]
 
 MIDDLEWARE = [
@@ -89,13 +77,17 @@ WSGI_APPLICATION = 'NkechiDiner.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+DATABASES = {
+    "default": dj_database_url.config(default="postgresql://nkechi_user:5e2tbN6a2AbuR6Zxz43O2ZIQ69O668tq@dpg-cv8k7jtumphs73cppqvg-a.oregon-postgres.render.com/nkechi")
+}
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get("DATABASE_URL", "postgres://nkechi_user:5e2tbN6a2AbuR6Zxz43O2ZIQ69O668tq@dpg-cv8k7jtumphs73cppqvg-a/nkechi"),
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
