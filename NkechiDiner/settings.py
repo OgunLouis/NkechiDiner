@@ -15,6 +15,19 @@ import dj_database_url
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
+# Add Cloudinary settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'damuyovkc',
+    'API_KEY': '827671151929193',
+    'API_SECRET': '6OYoZIQyopiXaWvUjr5PHz-QQvw',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,8 +38,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "True"
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST", "").split()
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST").split(" ")
 
 
 # Application definition
@@ -38,7 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Kilishi',
+    'Kilishi','cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -77,12 +91,16 @@ WSGI_APPLICATION = 'NkechiDiner.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'nkechidiner',  # Your database name
+        'USER': 'root',  # Default XAMPP user
+        'PASSWORD': '',  # Leave empty (unless you set one)
+        'HOST': '127.0.0.1',  # Or 'localhost'
+        'PORT': '3306',  # Default MySQL port
     }
 }
-database_url = os.environ.get("DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse(database_url)
+#database_url = os.environ.get("DATABASE_URL")
+#DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from cloudinary.models import CloudinaryField
 # Create your models here.
 class kilishi_order(models.Model):
     first_name = models.CharField(max_length=200)
@@ -15,7 +15,7 @@ class kilishi_order(models.Model):
 class products(models.Model):
     product_name = models.CharField(max_length=200)
     price = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='images/')
+    image = CloudinaryField('image')
     desc = models.TextField(default=None, null=True, blank=True)
     def __str__(self):
         return f"{self.product_name}"
